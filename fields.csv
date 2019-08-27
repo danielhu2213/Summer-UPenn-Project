@@ -1,0 +1,316 @@
+table,colname,sdesc,type,length,constraints
+crash,ARRIVAL_TM ,Time police arrived at the scene ,TEXT ,4,HHMM 
+crash,AUTOMOBILE_COUNT ,Total Amount of Automobiles Involved ,NUMBER ,2,
+crash,BELTED_DEATH_COUNT ,Total Deaths of belted occupants ,NUMBER ,2,
+crash,BELTED_MAJ_INJ_COUNT ,Total Major Injuries of belted occupants ,NUMBER ,2,
+crash,BICYCLE_COUNT ,Total amount of Bicycles involved ,NUMBER ,2,
+crash,BICYCLE_DEATH_COUNT ,Total amount of Bicyclist Fatalities ,NUMBER ,2,
+crash,BICYCLE_MAJ_INJ_COUNT ,Total amount of Bicyclist Major Injuries ,NUMBER ,2,
+crash,BUS_COUNT ,Total amount of Buses involved ,NUMBER ,2,
+crash,COLLISION_TYPE ,Collision category that defines the crash ,TEXT ,1,See Column Code 
+crash,COMM_VEH_COUNT ,Total Commercial vehicles involved ,NUMBER ,2,
+crash,CONS_ZONE_SPD_LIM ,Speed limit for the Construction Zone ,TEXT ,2,
+crash,COUNTY ,County Code Number where crash occurred ,TEXT ,2,See Column Code
+crash,CRASH_MONTH ,Month when the crash occurred ,TEXT ,2,
+crash,CRASH_YEAR ,Year when the crash occurred ,TEXT ,4,
+crash,CRN ,Crash Record Number ,NUMBER ,2,*Key to data base records *
+crash,DAY_OF_WEEK ,Day of the Week code when crash occurred ,TEXT ,1,See Column Code
+crash,DEC_LAT ,Decimal format of the Latitude ,NUMBER ,2.4,Latitude expressed in decimal degrees 99.9999 
+crash,DEC_LONG ,Decimal format of the Longitude ,NUMBER ,2.4,Longitude expressed in decimal degrees 99.9999 
+crash,DISPATCH_TM ,Time police were dispatched to the scene ,TEXT ,4,HHMM (Hour Minute) 
+crash,DISTRICT ,District Number where crash occurred (Based on County) ,TEXT ,2,See Column Code
+crash,DRIVER_COUNT_16YR ,Total amount of 16 year old drivers ,NUMBER ,2,
+crash,DRIVER_COUNT_17YR ,Total amount of 17 year old drivers ,NUMBER ,2,
+crash,DRIVER_COUNT_18YR ,Total amount of 18 year old drivers ,NUMBER ,2,
+crash,DRIVER_COUNT_19YR ,Total amount of 19year old drivers ,NUMBER ,2,
+crash,DRIVER_COUNT_20YR ,Total amount of 20 year old drivers ,NUMBER ,2,
+crash,DRIVER_COUNT_50_64YR ,Total amount of 50 to 64 year old drivers ,NUMBER ,2,
+crash,DRIVER_COUNT_65_74YR ,Total amount of 65 to 74 year old drivers ,NUMBER ,2,
+crash,DRIVER_COUNT_75PLUS ,Total amount of drivers ages 75 and up ,NUMBER ,2,
+crash,EST_HRS_CLOSED ,Estimated hours roadway was closed ,TEXT ,1,HHSS 
+crash,FATAL_COUNT ,Total amount of fatalities involved ,NUMBER ,2,
+crash,HEAVY_TRUCK_COUNT ,Total amount of Heavy Trucks involved ,NUMBER ,2,
+crash,HOUR_OF_DAY ,The hour of Day when the crash occurred ,TEXT ,2,00 to 23 
+crash,ILLUMINATION ,Code that defines lighting at crash scene ,TEXT ,1,See Column Code
+crash,INTERSECT_TYPE ,Code that defines the Intersection Type ,TEXT ,2,See Column Code
+crash,LANE_CLOSED ,Was there a lane closure? (Y/N) ,TEXT ,1,1=Y
+crash,LATITUDE ,GPS Latitude determined by PennDOT ,TEXT ,12,DD MM:SS.ddd
+crash,LN_CLOSE_DIR ,Direction of traffic in closed lane (s) ,TEXT ,1,See Column Code
+crash,LOCATION_TYPE ,Code that defines the crash location ,TEXT ,2,See Column Code
+crash,LONGITUDE ,GPS Longitude determined by PennDOT (in negative degrees) ,TEXT ,12,DD MM:SS.ddd
+crash,MAJ_INJ_COUNT ,Total amount of Major Injuries involved ,NUMBER ,2,
+crash,MAX_SEVERITY_LEVEL ,Injury severity level of the crash ,TEXT ,1,See Column Code
+crash,MCYCLE_DEATH_COUNT ,Total amount of Motorcyclist fatalities ,NUMBER ,2,
+crash,MCYCLE_MAJ_INJ_COUNT ,Total amount of Motorcyclist Major Injuries ,NUMBER ,2,
+crash,MIN_INJ_COUNT ,Total amount of Minimal Injuries ,NUMBER ,2,
+crash,MOD_INJ_COUNT ,Total amount of Moderate Injuries ,NUMBER ,2,
+crash,MOTORCYCLE_COUNT ,Total amount of Motorcycles Involved ,NUMBER ,2,
+crash,MUNICIPALITY ,Municipality Code ,TEXT ,5,See Municipality Code
+crash,NTFY_HIWY_MAINT ,PENNDOT highway maintenance notified? ,TEXT ,1,1=Y
+crash,PED_COUNT ,Total Pedestrians involved ,NUMBER ,2,
+crash,PED_DEATH_COUNT ,Total Pedestrian fatalities ,NUMBER ,2,
+crash,PED_MAJ_INJ_COUNT ,Total Pedestrian Major Injuries ,NUMBER ,2,
+crash,PERSON_COUNT ,Total People involved ,NUMBER ,2,
+crash,POLICE_AGCY ,Code of the Reporting Police Agency ,TEXT ,5,See Police Agency Code
+crash,RDWY_SURF_TYPE_CD ,Code for the Roadway surface type -only for fatal crashes ,TEXT ,2,See Column Code 
+crash,RELATION_TO_ROAD ,Code for the crash's relativity to the road ,TEXT ,2,See Column Code
+crash,ROAD_CONDITION ,Roadway Surface Condition Code ,TEXT ,1,See Column Code 
+crash,SCH_BUS_IND ,Did the crash involve a School Bus? (Y/N) ,TEXT ,1,Y = Yes N = No 
+crash,SCH_ZONE_IND ,Did the crash occur in a School Zone? (Y/N) ,TEXT ,1,Y = Yes N = No 
+crash,SMALL_TRUCK_COUNT ,Total amount of Small Trucks involved ,NUMBER ,2,
+crash,SPEC_JURIS_CD ,Code that defines any special jurisdiction - only for fatal crashes ,TEXT ,1,See Column Code
+crash,SUV_COUNT ,Total count of sport utility vehicles involved ,NUMBER ,2,
+crash,TCD_FUNC_CD ,Code for Traffic Control Device state ,TEXT ,2,See Column Code 
+crash,TCD_TYPE ,Code that defines the Traffic Control Device ,TEXT ,1,See Column Code
+crash,TFC_DETOUR_IND ,Was Traffic Detoured? (Y/N) ,TEXT ,1,1=Y
+crash,TIME_OF_DAY ,The Time of Day When the Crash Occurred ,TEXT ,4,0000 through 2359 
+crash,TOTAL_UNITS ,Total count of all Vehicles and Pedestrians ,NUMBER ,2,
+crash,UNBELTED_OCC_COUNT ,Total count of all unbelted occupants ,NUMBER ,2,
+crash,UNB_DEATH_COUNT ,No. of people killed not wearing a seatbelt ,NUMBER ,2,
+crash,UNB_MAJ_INJ_COUNT ,Total # of unbelted sustaining Major Injuries ,NUMBER ,2,
+crash,UNK_INJ_DEG_COUNT ,No. of injuries with unknown severity ,NUMBER ,2,
+crash,UNK_INJ_PER_COUNT ,No. of people that are unknown if injured ,NUMBER ,2,
+crash,URBAN_RURAL ,Code to classify crash as Urban or Rural based on municipality ,TEXT ,1,1= Rural
+crash,VAN_COUNT ,Total amount of vans involved ,NUMBER ,2,
+crash,VEHICLE_COUNT ,Total number of all motor vehicles involved in the crash ,NUMBER ,2,
+crash,WEATHER ,Code for the weather type at time of crash ,TEXT ,1,See Column Code 
+crash,WK_ZONE_IND ,Did the crash occur in a work zone (Y/N) ,TEXT ,1,1=Y
+crash,WORKERS_PRES ,Were construction personnel present? (Y/N) ,TEXT ,1,1=Y
+crash,WZ_CLOSE_DETOUR ,Was traffic rerouted due to work zone?(Y/N) ,TEXT ,1,1=Y
+crash,WORK_ZONE_LOC ,The Work Zone Location Code ,TEXT ,1,See Column Code 
+crash,WORK_ZONE_TYPE ,Code to define the type of Work Zone ,TEXT ,1,See Column Code 
+crash,WZ_FLAGGER ,Did Work zone have a flagman? (Y/N) ,TEXT ,1,1=Y
+crash,WZ_LAW_OFFCR_IND ,Did Work zone have a patrolman? (Y/N) ,TEXT ,1,1=Y
+crash,WZ_LN_CLOSURE ,Did Work zone have a lane closure? (Y/N) ,TEXT ,1,1=Y
+crash,WZ_MOVING ,Was there moving work in the zone? (Y/N) ,TEXT ,1,1=Y
+crash,WZ_OTHER ,Was this a special type of work zone? (Y/N) ,TEXT ,1,1=Y
+crash,WZ_SHLDER_MDN ,Was a median/shoulder in the zone? (Y/N) ,TEXT ,1,1=Y
+commveh,AXLE_CNT ,Number of axles on the vehicle ,TEXT ,2,
+commveh,CARGO_BD_TYPE ,Code for the Cargo Carrier's Body Type ,TEXT ,1,See Column Code
+commveh,CARRIER_NM ,Name of the Carrier ,TEXT ,32,
+commveh,CARRIER_ADDR1 ,Address of Carrier ,TEXT ,25,
+commveh,CARRIER_ADDR2 ,Address of Carrier line 2 ,TEXT ,25,
+commveh,CARRIER_CITY ,City of Carrier ,TEXT ,15,
+commveh,CARRIER_STATE ,State of Carrier ,TEXT ,2,
+commveh,CARRIER_ZIP ,Zip Code of Carrier ,TEXT ,10,
+commveh,CARRIER_TEL ,Telephone of Carrier ,TEXT ,10,
+commveh,CRN ,Crash Record Number ,NUMBER ,10,
+commveh,GVWR ,Gross vehicle weight rating ,TEXT ,6,
+commveh,HAZMAT_CD1 ,Hazmat Code for material one onboard ,TEXT ,1,See Column Code
+commveh,HAZMAT_CD2 ,Hazmat Code for material two onboard ,TEXT ,1,See Column Code
+commveh,HAZMAT_CD3 ,Hazmat Code for material three onboard ,TEXT ,1,See Column Code
+commveh,HAZMAT_CD4 ,Hazmat Code for material four onboard ,TEXT ,1,See Column Code 
+commveh,HAZMAT_IND ,Yes/No indicator for Hazmat on board ,TEXT ,1,1= Y
+commveh,HAZMAT_REL_IND1 ,Yes/No indicator for Hazmat one released ,TEXT ,1,1= Y
+commveh,HAZMAT_REL_IND2 ,Yes/No indicator for Hazmat two released ,TEXT ,1,1= Y
+commveh,HAZMAT_REL_IND3 ,Yes/No indicator for Hazmat three released ,TEXT ,1,1= Y
+commveh,HAZMAT_REL_IND4 ,Yes/No indicator for Hazmat four released ,TEXT ,1,1= Y
+commveh,ICC_NUM ,Interstate commercial carrier number ,TEXT ,9,(not in use after 12/31/15) 
+commveh,OSIZE_LOAD_IND ,Yes/No indicator for oversize load ,TEXT ,1,1= Y
+commveh,PUC_NUM ,PA Utility Commission Number ,TEXT ,10,
+commveh,UNIT_NUM ,Unit number of the vehicle in the crash event ,NUMBER ,2,
+commveh,USDOT_NUM ,US Dept of Transportation Number ,TEXT ,8,
+commveh,VEH_CONFIG_CD ,Vehicle Configuration Code ,TEXT ,2,See Column Code
+cycle,CRN ,Crash Record Number ,NUMBER ,10,
+cycle,MC_ENGINE_SIZE ,Motorcycle engine size (cc) ,TEXT ,5,
+cycle,MC_PASSNGR_IND ,Did the Motorcycle have a passenger? (Y/N) ,TEXT ,1,1 = Y
+cycle,MC_BAG_IND ,Did the Motorcycle have Side bags? (Y/N) ,TEXT ,1,1 = Y
+cycle,MC_TRAIL_IND ,Did the Motorcycle have Trailer? (Y/N) ,TEXT ,1,1 = Y
+cycle,MC_DVR_EDC_IND ,Did Motorcycle Driver have safety training? (Y/N) ,TEXT ,1,1 = Y
+cycle,MC_DVR_EYEPRT_IND ,Did Motorcycle Driver wear Eye Protection?(Y/N) ,TEXT ,1,1 = Y
+cycle,MC_DVR_LNGSLV_IND ,Did Motorcycle Driver have Long sleeves? (Y/N) ,TEXT ,1,1 = Y
+cycle,MC_DVR_LNGPNTS_IND ,Did Motorcycle Driver wear Long pants?(Y/N) ,TEXT ,1,1 = Y
+cycle,MC_DVR_BOOTS_IND ,Did Motorcycle Driver wear Boots? (Y/N) ,TEXT ,1,1 = Y
+cycle,MC_DVR_HLMTON_IND ,Did Motorcycle Driver wear Helmet? (Y/N) ,TEXT ,1,1 = Y
+cycle,MC_DVR_HLMTDOT_IND ,Was Driver's Helmet PENNDOT certified?(Y/N) ,TEXT ,1,1 = Y
+cycle,MC_DVR_HLMT_TYPE ,Code for Helmet type of the Motorcycle Driver ,TEXT ,1,See Column Code
+cycle,MC_PAS_EYEPRT_IND ,Did Motorcycle passenger wear Eye Protection? (Y/N) ,TEXT ,1,1 = Y
+cycle,MC_PAS_LNGSLV_IND ,Did Motorcycle passenger have Long sleeves? (Y/N) ,TEXT ,1,1 = Y
+cycle,MC_PAS_LNGPNTS_IND ,Did Motorcycle passenger wear long pants?(Y/N) ,TEXT ,1,1 = Y
+cycle,MC_PAS_BOOTS_IND ,Did Motorcycle passenger wear Boots?(Y/N) ,TEXT ,1,1 = Y
+cycle,MC_PAS_HLMTON_IND ,Did Motorcycle passenger wear a Helmet?(Y/N) ,TEXT ,1,1 = Y
+cycle,MC_PAS_HLMTDOT_IND ,Was passenger's helmet PENNDOT cert.?(Y/N) ,TEXT ,1,1 = Y
+cycle,MC_PAS_HLMT_TYPE ,Code for Helmet type of the Motorcycle pass. ,TEXT ,1,See Column Code
+cycle,PC_PASSNGR_IND ,Did the Pedal cycle have a passenger ?(Y/N) ,TEXT ,1,1 = Y
+cycle,PC_HDLGHT_IND ,Did the Pedal cycle have a Headlight (Y/N) ,TEXT ,1,1 = Y
+cycle,PC_HLMT_IND ,Did Pedal cycle driver wear a helmet? (Y/N) ,TEXT ,1,1 = Y
+cycle,PC_REAR_RFLTR_IND ,Did Pedal cycle have a Rear Reflector?(Y/N) ,TEXT ,1,1 = Y
+cycle,UNIT_NUM ,Unit number of the vehicle in the crash event ,NUMBER ,2,
+flag,AGGRESSIVE_DRIVING ,At Least One Aggressive Driver Action ,NUMBER ,1,0 = No
+flag,ALCOHOL_RELATED ,At Least One Driver or Pedestrian with reported or suspected Alcohol Use ,NUMBER ,1,0 = No
+flag,BICYCLE ,Bicycle Indicator ,NUMBER ,1,0 = No
+flag,CELL_PHONE ,Driver Using Cell Phone (Hand Held or Hands Free) ,NUMBER ,1,0 = No
+flag,CRN ,Crash Record Number ,NUMBER ,10,
+flag,COMM_VEHICLE ,Crash has at least 1 involved Commercial Vehicle ,NUMBER ,1,0 = No
+flag,CROSS_MEDIAN ,Cross Median Indicator ,NUMBER ,1,0 = No
+flag,CURVE_DVR_ERROR ,At Least One Driver Action Involving Curve Negotiation ,NUMBER ,1,0 = No
+flag,CURVED_ROAD ,Curve in Road ,NUMBER ,1,0 = No
+flag,DEER_RELATED ,Deer Struck or Deer in Roadway ,NUMBER ,1,0 = No
+flag,DISTRACTED ,At Least One Driver Action Indicating a Distraction ,NUMBER ,1,0 = No
+flag,DRINKING_DRIVER ,Drinking Driver Indicator ,NUMBER ,1,0 = No
+flag,DRIVER_16YR ,At Least One Driver 16 Years of Age ,NUMBER ,1,0 = No
+flag,DRIVER_17YR ,At Least One Driver 17 Years of Age ,NUMBER ,1,0 = No
+flag,DRIVER_18YR ,At Least One Driver 18 Years of Age ,NUMBER ,1,0 = No
+flag,DRIVER_19YR ,At Least One Driver 19 Years of Age,NUMBER ,1,0 = No
+flag,DRIVER_20YR ,At Least One Driver 20 Years of Age,NUMBER ,1,0 = No
+flag,DRIVER_50_64YR ,At Least One Driver 50-64 Years of Age,NUMBER ,1,0 = No
+flag,DRIVER_65_74YR ,At Least One Driver 65-74 Years of Age,NUMBER ,1,0 = No
+flag,DRIVER_75PLUS ,At Least One Driver 75 plus Years of Age,NUMBER ,1,0 = No
+flag,DRUG_RELATED ,At least one Driver or Pedestrian with Drugs reported or suspected ,NUMBER ,1,0 = No
+flag,DRUGGED_DRIVER ,At least one Driver with Drugs reported or suspected ,NUMBER ,1,0 = No
+flag,FATAL ,Fatality Indicator ,NUMBER ,1,0 = No
+flag,FATAL_OR_MAJ_INJ ,Fatality or Major Injury Indicator ,NUMBER ,1,0 = No
+flag,FATIGUE_ASLEEP ,Fatigue or Asleep Indicator ,NUMBER ,1,0 = No
+flag,FIRE_IN_VEHICLE ,At least 1 Vehicle with Fire Damage ,NUMBER ,1,0 = No
+flag,HAZARDOUS_TRUCK ,At least one Heavy Truck carrying Hazardous Material ,NUMBER ,1,0 = No
+flag,HIT_BARRIER ,Hit Barrier Indicator ,NUMBER ,1,0 = No
+flag,HIT_BRIDGE ,Hit Bridge Indicator ,NUMBER ,1,0 = No
+flag,HIT_DEER ,Hit Deer Indicator ,NUMBER ,1,0 = No
+flag,HIT_EMBANKMENT ,Hit Embankment Indicator ,NUMBER ,1,0 = No
+flag,HIT_FIXED_OBJECT ,Hit Fixed Object Indicator ,NUMBER ,1,0 = No
+flag,HIT_GDRAIL ,Hit Gide Rail Indicator ,NUMBER ,1,0 = No
+flag,HIT_GDRAIL_END ,Hit Gide Rail End Indicator ,NUMBER ,1,0 = No
+flag,HIT_PARKED_VEHICLE ,At least one Legally or Illegally Parked Vehicle was struck ,NUMBER ,1,0 = No
+flag,HIT_POLE ,Hit Pole Indicator ,NUMBER ,1,0 = No
+flag,HIT_TREE_SHRUB ,Hit Tree or Shrub Indicator ,NUMBER ,1,0 = No
+flag,HO_OPPDIR_SDSWP ,Head on or Side Swipe Indicator ,NUMBER ,1,0 = No
+flag,HVY_TRUCK_RELATED ,Heavy Truck Related Indicator ,NUMBER ,1,0 = No
+flag,ICY_ROAD ,Icy Road Indicator ,NUMBER ,1,0 = No
+flag,ILLEGAL_DRUG_RELATED ,At Least 1 Driver or Pedestrian had reported or suspected Illegal Drug Use ,NUMBER ,1,0 = No
+flag,ILLUMINATION_DARK ,Illumination Indicates that the Crash Scene Lighting was Dark ,NUMBER ,1,0 = No
+flag,IMPAIRED_DRIVER ,At least One Driver was Impaired by Drugs or Alcohol ,NUMBER ,1,0 = No
+flag,INJURY ,At least 1 Person Was Injured in the Crash ,NUMBER ,1,0 = No
+flag,INJURY_OR_FATAL ,At least 1 Person Was Injured or Killed in the Crash ,NUMBER ,1,0 = No
+flag,INTERSECTION ,Intersection Indicator ,NUMBER ,1,0 = No
+flag,INTERSTATE ,Non-Turnpike Interstate Indicator ,NUMBER ,1,0 = No
+flag,LIMIT_65MPH ,65MPH Speed Limit Indicator ,NUMBER ,1,0 = No
+flag,LOCAL_ROAD ,Local Road Indicator ,NUMBER ,1,0 = No
+flag,LOCAL_ROAD_ONLY ,Local Road Only Indicator ,NUMBER ,1,0 = No
+flag,MAJOR_INJURY ,At least 1 Person Sustained a Major Injury ,NUMBER ,1,0 = No
+flag,MC_DRINKING_DRIVER ,At least 1 Motorcycle driver has reported or suspected Alcohol Use ,NUMBER ,1,0 = No
+flag,MINOR_INJURY ,At least 1 Person Sustained a Minor Injury ,NUMBER ,1,0 = No
+flag,MODERATE_INJURY ,At least 1 Person Sustained a Moderate Injury ,NUMBER ,1,0 = No
+flag,MOTORCYCLE ,Motorcycle Indicator ,NUMBER ,1,0 = No
+flag,NHTSA_AGG_DRIVING ,The Crash meets the NHTSA definition of Aggressive Driving ,NUMBER ,1,0 = No
+flag,NON_INTERSECTION ,Non Intersection Indicator ,NUMBER ,1,0 = No
+flag,NO_CLEARANCE ,No Clearance Indicator ,NUMBER ,1,0 = No
+flag,OVERTURNED ,Overturned Vehicle Indicator ,NUMBER ,1,0 = No
+flag,PEDESTRIAN ,Pedestrian Indicator ,NUMBER ,1,0 = No
+flag,PHANTOM_VEHICLE ,Phantom Vehicle Indicator ,NUMBER ,1,0 = No
+flag,PROPERTY_DAMAGE_ONLY ,Property Damage Only Indicator ,NUMBER ,1,0 = No
+flag,PSP_REPORTED ,Crash Investigated by the Pennsylvania State Police ,NUMBER ,1,0 = No
+flag,REAR_END ,Rear End Collision Indicator ,NUMBER ,1,0 = No
+flag,RUNNING_RED_LT ,Driver Running Red Light Indicator ,NUMBER ,1,0 = No
+flag,RUNNING_STOP_SIGN ,At least one Driver Ran a Stop Sign ,NUMBER ,1,0 = No
+flag,SCHOOL_BUS ,Indicates if the crash was school bus related ,NUMBER ,1,0 = No
+flag,SCHOOL_BUS_UNIT ,Indicates if a School Bus was one of the units involved in the crash ,NUMBER ,1,0 = No
+flag,SCHOOL_ZONE ,School Zone Indicator ,NUMBER ,1,0 = No
+flag,SHLDR_RELATED ,Shoulder Related Indicator ,NUMBER ,1,0 = No
+flag,SIGNALIZED_INT ,Signalized Intersection Indicator ,NUMBER ,1,0 = No
+flag,SNOW_SLUSH_ROAD ,Snow Slush Road Indicator ,NUMBER ,1,0 = No
+flag,SPEEDING ,Speeding Indicator ,NUMBER ,1,0 = No
+flag,SPEEDING_RELATED ,Speeding Related Indicator ,NUMBER ,1,0 = No
+flag,STATE_ROAD ,State Road Indicator ,NUMBER ,1,0 = No
+flag,STOP_CONTROLLED_INT ,Stop Controlled Intersection Indicator ,NUMBER ,1,0 = No
+flag,SUDDEN_DEER ,Sudden Deer Indicator ,NUMBER ,1,0 = No
+flag,SV_RUN_OFF_RD ,Single Vehicle Run Off Road Indicator ,NUMBER ,1,0 = No
+flag,TAILGATING ,Tailgating Indicator ,NUMBER ,1,0 = No
+flag,TRAIN ,Train Indicator ,NUMBER ,1,0 = No
+flag,TRAIN_TROLLEY ,Train or Trolley Indicator ,NUMBER ,1,0 = No
+flag,TROLLEY ,Trolley Indicator ,NUMBER ,1,0 = No
+flag,TURNPIKE ,Turnpike Indicator ,NUMBER ,1,0 = No
+flag,UNBELTED ,Anyone in crash unbelted? (applicable vehicles only) ,NUMBER ,1,0 = No
+flag,UNDERAGE_DRNK_DRV ,Under Age drinking driver Indicator ,NUMBER ,1,0 = No
+flag,UNLICENSED ,Unlicensed Driver Indicator ,NUMBER ,1,0 = No
+flag,UNSIGNALIZED_INT ,Unsignalized Intersection Indicator ,NUMBER ,1,0 = No
+flag,VEHICLE_FAILURE ,Vehicle Failure Indicator ,NUMBER ,1,0 = No
+flag,VEHICLE_TOWED ,At least 1 Vehicle was towed from the scene ,NUMBER ,1,0 = No
+flag,WET_ROAD ,Wet Road Indicator ,NUMBER ,1,0 = No
+flag,WORK_ZONE ,Work Zone Indicator ,NUMBER ,1,0 = No
+person,AGE ,AGE of Person ,NUMBER ,2,Those under the age of 1 are listed as 1
+person,AIRBAG_PADS ,Airbag or Pads ,TEXT ,2,See Column Code 
+person,CLOTHING_TYPE ,Clothing Type - Only for Pedestrians ,TEXT ,2,See Column Code
+person,CRN ,Crash Record Number ,NUMBER ,10,
+person,DVR_LIC_STATE ,State of Licensed Driver ,TEXT ,2,See Column Code 
+person,DVR_PED_CONDITION ,Driver Pedestrian Condition Code ,TEXT ,1,See Column Code 
+person,EJECTION_IND ,Ejection Indicator - Only for vehicle occupants ,TEXT ,1,See Column Code 
+person,EJECT_PATH_CD ,Ejection Path Code- Only for vehicle occupants ,TEXT ,2,See Column Code
+person,EXTRIC_IND ,Extrication Indicator- Only for vehicle occupants ,TEXT ,1,See Column Code
+person,INJ_SEVERITY ,Injury Severity Code ,TEXT ,1,See Column Code 
+person,PED_LOCATION ,Pedestrian Location Code ,TEXT ,2,See Column Code 
+person,PED_SIGNAL ,Pedestrian Signal Indicator ,TEXT ,1,See Column Code 
+person,PERSON_NUM ,Person Number - Sequential per Unit ,NUMBER ,2,
+person,PERSON_TYPE ,Person Type Code ,TEXT ,2,See Column Code 
+person,RESTRAINT_HELMET ,Restraint or Helmet ,TEXT ,2,See Column Code 
+person,SEAT_POSITION ,Seat in unit where person sat ,TEXT ,2,See Column Code
+person,SEX ,Sex (Gender) of this individual ,TEXT ,1,See Column Code
+person,TRANSPORTED ,Transported to medical facility Y/N ,TEXT ,1,1= Y
+person,UNIT_NUM ,Unit number of the vehicle (or pedestrian) assigned to this person ,NUMBER ,2,
+derived,cnt_road_01_interstate,derived - count of interstate road segments,NUMBER ,,ROADWAY
+derived,cnt_road_02_state,derived - count of state road segments,NUMBER ,,ROADWAY
+derived,cnt_road_03_local,derived - count of local road segments,NUMBER ,,ROADWAY
+derived,cnt_road_04_other,derived - count of other road segments,NUMBER ,,ROADWAY
+derived,cnt_road_segments,derived - count of ALL road segments,NUMBER ,,ROADWAY
+derived,LANE_COUNT_min,derived - minimum lane count,NUMBER ,,ROADWAY
+derived,LANE_COUNT_max,derived - maximum lane count,NUMBER ,,ROADWAY
+derived,SPEED_LIMIT_nunique,derived - number of unique speed limits,NUMBER ,,ROADWAY
+derived,SPEED_LIMIT_min,derived - minimum speed limit,NUMBER ,,ROADWAY
+derived,SPEED_LIMIT_max,derived - maximum speed limit,NUMBER ,,ROADWAY
+derived,model_yr_min,derived - oldest vehicle model year,NUMBER ,,VEHICLE
+derived,speed_max,derived - max travel speed estimated (999 is unknown),NUMBER ,,VEHICLE
+derived,cnt_hazmat_commveh,derived - count of commercial vehicles with hazmat,NUMBER ,,VEHICLE
+derived,parked_legal_cnt,derived - count of legally parked vehicles,NUMBER ,,VEHICLE
+derived,parked_illegal_cnt,derived - count of illegally parked vehicles,NUMBER ,,VEHICLE
+derived,non_motorized_cnt,derived - count of non motorized vehicles,NUMBER ,,VEHICLE
+derived,pedestrian_cnt,derived - count of pedestrians (from VEHICLE data),NUMBER ,,VEHICLE
+derived,ind_mc_drv_safty_training_N,derived - indicator of mc driver without safty training,NUMBER ,,VEHICLE
+derived,ind_mc_drv_helmet_N,derived - indicator of mc driver without helmet,NUMBER ,,VEHICLE
+derived,ind_mc_passenger_Y,derived - indicator of mc passenger,NUMBER ,,VEHICLE
+derived,ind_pc_head_light_N,derived - indicator of pc without headlight,NUMBER ,,VEHICLE
+derived,ind_pc_helmet_N,derived - indicator of pc without helmet,NUMBER ,,VEHICLE
+derived,ind_pc_passenger_Y,derived - indicator of pc passenger,NUMBER ,,VEHICLE
+derived,ind_pc_rear_reflector_N,derived - indicator of pc without rear reflector,NUMBER ,,VEHICLE
+derived,trailer_veh_cnt,derived - count of trailer vehicles,NUMBER ,,VEHICLE
+derived,cnt_driver,derived - count of vehicle drivers,NUMBER ,,PERSON - Driver
+derived,drv_age_min,derived - min age of vehicle drivers,NUMBER ,,PERSON - Driver
+derived,drv_age_max,derived - max age of vehicle drivers (999 is unkown),NUMBER ,,PERSON - Driver
+derived,drv_drinking_sum,derived - count of drinking drivers,NUMBER ,,PERSON - Driver
+derived,drv_drug_sum,derived - count of drivers with drugs,NUMBER ,,PERSON - Driver
+derived,drv_sick_medication_sum,derived - count of drivers being sick or taken medication,NUMBER ,,PERSON - Driver
+derived,drv_fatigue_asleep_sum,derived - count of drivers being asleep or with fatigue,NUMBER ,,PERSON - Driver
+derived,drv_no_restraint_helmet_sum,derived - count of drivers without restraint or helmets,NUMBER ,,PERSON - Driver
+derived,cnt_passenger,derived - count of passengers,NUMBER ,,PERSON - Passenger
+derived,passenger_age_min,derived - min age of passengers,NUMBER ,,PERSON - Passenger
+derived,passenger_age_max,derived - max age of passengers (999 is unknown),NUMBER ,,PERSON - Passenger
+derived,passenger_no_restraint_helmet_sum,derived - count of passengers without restraint or helmets,NUMBER ,,PERSON - Passenger
+derived,cnt_pedestrian,derived - count of pedestrians (from PERSON data),NUMBER ,,PERSON - Pedestrian
+derived,pedestrian_age_min,derived - min age of pedestrians,NUMBER ,,PERSON - Pedestrian
+derived,pedestrian_age_max,derived - max age of pedestrians (999 is unknown),NUMBER ,,PERSON - Pedestrian
+derived,pedestrian_drinking_sum,derived - count of drinking pedestrians,NUMBER ,,PERSON - Pedestrian
+derived,pedestrian_drug_sum,derived - count of pedestrians with drugs,NUMBER ,,PERSON - Pedestrian
+derived,pedestrian_sick_medication_sum,derived - count of pedestrians being sick or taken medication,NUMBER ,,PERSON - Pedestrian
+derived,pedestrian_fatigue_asleep_sum,derived - count of pedestrians being asleep or with fatigue,NUMBER ,,PERSON - Pedestrian
+derived,pedestrian_loc_int_crosswalk_sum,derived - count of pedestrians at intersection with crosswalks,NUMBER ,,PERSON - Pedestrian
+derived,pedestrian_loc_int_no_crosswalk_sum,derived - count of pedestrians at intersection without crosswalks,NUMBER ,,PERSON - Pedestrian
+derived,pedestrian_loc_in_roadway_sum,derived - count of pedestrians IN ROADWAY,NUMBER ,,PERSON - Pedestrian
+derived,pedestrian_loc_shoulder_sidewalk_sum,derived - count of pedestrians at shoulder or sidewalk,NUMBER ,,PERSON - Pedestrian
+derived,pedestrian_signal_Y_sum,derived - count of pedestrians with pedestrian signals,NUMBER ,,PERSON - Pedestrian
+derived,pedestrian_signal_N_sum,derived - count of pedestrians without pedestrian signals,NUMBER ,,PERSON - Pedestrian
+derived,pedestrian_signal_not_int_sum,derived - count of pedestrians NOT at intersections,NUMBER ,,PERSON - Pedestrian
+derived,derived_ind_hour_00_04,derived - indicator of hour 00-04,NUMBER ,,Crash data
+derived,derived_ind_hour_04_08,derived - indicator of hour 04-08,NUMBER ,,Crash data
+derived,derived_ind_hour_08_12,derived - indicator of hour 08-12,NUMBER ,,Crash data
+derived,derived_ind_hour_12_16,derived - indicator of hour 12-16,NUMBER ,,Crash data
+derived,derived_ind_hour_16_20,derived - indicator of hour 16-20,NUMBER ,,Crash data
+derived,derived_ind_hour_20_24,derived - indicator of hour 20-24,NUMBER ,,Crash data
+derived,derived_ind_weekday,derived - indicator weekday mon-fri,NUMBER ,,Crash data
+derived,derived_ind_weekend,derived - indicator of weekend sat sun,NUMBER ,,Crash data
+derived,derived_ind_fri_sat,derived - indicator of fri and sat,NUMBER ,,Crash data
+derived,ind_fatal,derived - indicator of fatality (deaths),NUMBER ,,dependent var
+derived,ind_maj_inj,derived - indicator of major injuries,NUMBER ,,dependent var
+derived,ind_fatal_maj_inj,derived - indicator of fatality or major injuries,NUMBER ,,dependent var
+derived,derived_ind_summer_6_8,derived - indicator of summer jun-aug,NUMBER ,,Crash data
+derived,derived_ind_winter_11_2,derived - indicator of winter nov-feb,NUMBER ,,Crash data
+derived,tmp_vehicle_model_age_min,derived - temporary,NUMBER ,,Crash data
+derived,derived_vehicle_model_age_min,derived - minimum vehicle model age,NUMBER ,,Crash data
+
