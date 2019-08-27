@@ -1,0 +1,491 @@
+# python Python 3.6.0 |Anaconda 4.3.1
+# xgboost  0.80
+# pandas 0.19.2
+# xklearn 0.18.1
+
+import dill
+import copy
+import datetime
+from collections import OrderedDict
+import gc
+import io
+
+import pandas as pd
+import numpy as np
+from pandas.api.types import is_string_dtype
+from pandas.api.types import is_numeric_dtype
+import xgboost
+
+pd.set_option("display.max_rows", 150)
+pd.set_option("display.max_columns", 30)
+pd.set_option("display.width", 250)
+NTHREAD = 20
+
+
+# read in metadata
+# only use 3 columns: colname, type, sdesc
+# this meta data is created as pdf -> word -> excel -> csv, so needs special treatment
+df_fields = pd.read_csv("data/fields.csv", sep=",", header=0)
+df_fields['colname'] = df_fields['colname']. \
+    str.lower(). \
+    str.strip(" ")
+df_fields['type'] = df_fields['type']. \
+    str.strip(" ")
+assert(df_fields['type'].isin(["TEXT", "NUMBER"]).all())
+df_fields = df_fields[["colname", "type", "sdesc"]]
+
+# read in data AS-IS
+df_crash = pd.read_csv('data/df_master1_07_17_crn_lvl.csv', header=0, sep=',\s*', engine='python')
+df_crash.rename(columns=df_crash.columns.to_series().str.lower().str.strip(" "), inplace=True)
+mark = df_crash.isnull().sum()
+
+# manually set up data types for columns not covered by metadata
+extra_dict = OrderedDict([
+    ("work_zone_ind", "TEXT"),
+    ("tot_inj_count", "NUMBER"),
+    ("collision_type_name", "TEXT"),
+    ("injury_count", "NUMBER")
+])
+cols_excluded = set(df_crash.columns).difference(set(df_fields['colname']))
+assert(set(extra_dict.keys()) == cols_excluded)
+n_extra_dict = len(extra_dict)
+null = [print(x) for x in cols_excluded]
+df_cols_excluded = pd.DataFrame({
+    "colname": list(extra_dict.keys()),
+    "sdesc": ["extra"] * n_extra_dict,
+    "type": list(extra_dict.values())
+})
+df_fields_ext = df_fields.append(df_cols_excluded)
+df_fields_ext.reset_index(drop=True, inplace=True)
+
+# data type conversion
+# TEXT ==> dtype category
+# NUMBER ==> dtype float
+col_type_dict = dict()
+for x in df_crash.columns:
+    # obtain metadata specified type: NUMBER or TEXT
+    x_df = df_fields_ext.query('colname == @x').drop_duplicates()
+    assert(x_df.shape[0] == 1), x
+    x_type = x_df['type'].tolist().pop()
+    x_sdesc = x_df['sdesc'].tolist().pop()
+    assert(["TEXT", "NUMBER"].count(x_type) == 1), "{}  --  {}".format(x, x_type)
+    # obtain AS-IS data type
+    x_is_numeric = is_numeric_dtype(df_crash[x])
+    x_is_string = is_string_dtype(df_crash[x])
+    x_dtype_name = df_crash[x].dtype.name
+    assert(x_is_numeric + x_is_string == 1)
+    if x_type == "TEXT":
+        col_type_dict[x] = ('category', "{:<30} : {:<10} | {:<10}  ==> {:<10} | {}".
+                            format(x, x_type, df_crash[x].dtype.name, "category", x_sdesc))
+    elif x_type == "NUMBER":
+        col_type_dict[x] = ('float', "{:<30} : {:<10} | {:<10}  ==> {:<10} | {}".
+                            format(x, x_type, df_crash[x].dtype.name, "float", x_sdesc))
+    else:
+        raise Exception("unexpected, please check")
+
+
+print('\n'.join([v[1] for k, v in col_type_dict.items()]))
+df_crash_1 = df_crash.astype({k: v[0] for k, v in col_type_dict.items()}, copy=True)
+mark1 = df_crash_1.isnull().sum()
+assert(mark1.equals(mark))
+
+x_cols = [
+    'automobile_count',
+    # 'belted_death_count',
+    # 'belted_maj_inj_count',
+    'bicycle_count',
+    # 'bicycle_death_count',
+    # 'bicycle_maj_inj_count',
+    'bus_count',
+    'collision_type',
+    'comm_veh_count',
+    'cons_zone_spd_lim',
+    'crash_month',
+    # 'crn',
+    'day_of_week',
+    'dec_lat',
+    'dec_long',
+    'driver_count_16yr',
+    'driver_count_17yr',
+    'driver_count_18yr',
+    'driver_count_19yr',
+    'driver_count_20yr',
+    'driver_count_50_64yr',
+    'driver_count_65_74yr',
+    'driver_count_75plus',
+    # 'fatal_count',
+    'heavy_truck_count',
+    'hour_of_day',
+    'illumination',
+    # 'injury_count',
+    'intersect_type',
+    'location_type',
+    # 'maj_inj_count',
+    # 'mcycle_death_count',
+    # 'mcycle_maj_inj_count',
+    'motorcycle_count',
+    # 'ped_count',
+    # 'ped_death_count',
+    # 'ped_maj_inj_count',
+    # 'person_count',
+    'relation_to_road',
+    'road_condition',
+    'sch_bus_ind',
+    'sch_zone_ind',
+    'small_truck_count',
+    'suv_count',
+    'time_of_day',
+    'total_units',
+    # 'tot_inj_count',
+    # 'unbelted_occ_count',
+    # 'unb_death_count',
+    # 'unb_maj_inj_count',
+    'urban_rural',
+    'van_count',
+    'vehicle_count',
+    'weather',
+    'work_zone_ind',
+    'collision_type_name',
+    'aggressive_driving',
+    'alcohol_related',
+    'bicycle',
+    'cell_phone',
+    'comm_vehicle',
+    'crash_year',
+    'cross_median',
+    'curved_road',
+    'curve_dvr_error',
+    'deer_related',
+    'distracted',
+    'drinking_driver',
+    'driver_16yr',
+    'driver_17yr',
+    'driver_18yr',
+    'driver_19yr',
+    'driver_20yr',
+    'driver_50_64yr',
+    'driver_65_74yr',
+    'driver_75plus',
+    'drugged_driver',
+    'drug_related',
+    # 'fatal',
+    # 'fatal_or_maj_inj',
+    'fatigue_asleep',
+    'fire_in_vehicle',
+    'hazardous_truck',
+    'hit_barrier',
+    'hit_bridge',
+    'hit_deer',
+    'hit_embankment',
+    'hit_fixed_object',
+    'hit_gdrail',
+    'hit_gdrail_end',
+    'hit_parked_vehicle',
+    'hit_pole',
+    'hit_tree_shrub',
+    'ho_oppdir_sdswp',
+    'hvy_truck_related',
+    'icy_road',
+    'illegal_drug_related',
+    'illumination_dark',
+    'impaired_driver',
+    # 'injury',
+    # 'injury_or_fatal',
+    'intersection',
+    'interstate',
+    'limit_65mph',
+    'local_road',
+    'local_road_only',
+    # 'major_injury',
+    'mc_drinking_driver',
+    # 'minor_injury',
+    # 'moderate_injury',
+    'motorcycle',
+    'nhtsa_agg_driving',
+    'non_intersection',
+    'no_clearance',
+    'overturned',
+    'pedestrian',
+    'phantom_vehicle',
+    # 'property_damage_only',
+    # 'psp_reported',
+    'rear_end',
+    'running_red_lt',
+    'running_stop_sign',
+    'school_bus',
+    'school_bus_unit',
+    'school_zone',
+    'shldr_related',
+    'signalized_int',
+    'snow_slush_road',
+    'speeding',
+    'speeding_related',
+    'state_road',
+    'stop_controlled_int',
+    'sudden_deer',
+    'sv_run_off_rd',
+    'tailgating',
+    'train',
+    'train_trolley',
+    'trolley',
+    'turnpike',
+    'unbelted',
+    'underage_drnk_drv',
+    'unlicensed',
+    'unsignalized_int',
+    'vehicle_failure',
+    'vehicle_towed',
+    'wet_road',
+    'work_zone',
+    'cnt_road_01_interstate',
+    'cnt_road_02_state',
+    'cnt_road_03_local',
+    'cnt_road_04_other',
+    'cnt_road_segments',
+    'lane_count_min',
+    'lane_count_max',
+    'speed_limit_nunique',
+    'speed_limit_min',
+    'speed_limit_max',
+    'model_yr_min',
+    'speed_max',
+    'cnt_hazmat_commveh',
+    'parked_legal_cnt',
+    'parked_illegal_cnt',
+    'non_motorized_cnt',
+    # 'pedestrian_cnt',
+    'ind_mc_drv_safty_training_n',
+    'ind_mc_drv_helmet_n',
+    'ind_mc_passenger_y',
+    'ind_pc_head_light_n',
+    'ind_pc_helmet_n',
+    'ind_pc_passenger_y',
+    'ind_pc_rear_reflector_n',
+    'trailer_veh_cnt',
+    'cnt_driver',
+    'drv_age_min',
+    'drv_age_max',
+    'drv_drinking_sum',
+    'drv_drug_sum',
+    'drv_sick_medication_sum',
+    'drv_fatigue_asleep_sum',
+    'drv_no_restraint_helmet_sum',
+    # 'cnt_passenger',
+    'passenger_age_min',
+    'passenger_age_max',
+    'passenger_no_restraint_helmet_sum',
+    # 'cnt_pedestrian',
+    'pedestrian_age_min',
+    'pedestrian_age_max',
+    'pedestrian_drinking_sum',
+    'pedestrian_drug_sum',
+    'pedestrian_sick_medication_sum',
+    'pedestrian_fatigue_asleep_sum',
+    'pedestrian_loc_int_crosswalk_sum',
+    'pedestrian_loc_int_no_crosswalk_sum',
+    'pedestrian_loc_in_roadway_sum',
+    'pedestrian_loc_shoulder_sidewalk_sum',
+    'pedestrian_signal_y_sum',
+    'pedestrian_signal_n_sum',
+    'pedestrian_signal_not_int_sum',
+    'derived_ind_hour_00_04',
+    'derived_ind_hour_04_08',
+    'derived_ind_hour_08_12',
+    'derived_ind_hour_12_16',
+    'derived_ind_hour_16_20',
+    'derived_ind_hour_20_24',
+    'derived_ind_weekday',
+    'derived_ind_weekend',
+    'derived_ind_fri_sat',
+    'derived_ind_summer_6_8',
+    'derived_ind_winter_11_2',
+    'tmp_vehicle_model_age_min',
+    'derived_vehicle_model_age_min'
+]
+y_cols = ['ind_fatal', 'ind_maj_inj', 'ind_fatal_maj_inj']
+for x in df_crash_1.select_dtypes(include=["category"]).columns:
+    x_n = len(df_crash_1[x].cat.categories)
+    x_sdesc = df_fields_ext.query('colname == @x')['sdesc'].drop_duplicates().tolist().pop()
+    if x_n > 30 or x_n < 2:
+        print("    drop categorical column {:<20} for cardinal(x) = {}".format(x, x_n))
+        if x in x_cols:
+            x_cols.remove(x)
+    else:
+        print("keep categorical column {:<20} for cardinal(x) = {}  --  {}".format(x, x_n, x_sdesc))
+
+
+df_crash_1 = df_crash_1.filter(items=x_cols + y_cols, axis=1)
+assert(set(df_crash_1.columns.tolist()) == set(x_cols + y_cols))
+np.random.seed(12345)
+msk = np.random.rand(len(df_crash_1)) < 0.8
+label = df_crash_1['ind_fatal']
+label_train = label[msk]
+label_test = label[~msk]
+df_crash_dummy = pd.get_dummies(
+    df_crash_1.filter(items=x_cols, axis=1),
+    dummy_na=True,
+    sparse=False). \
+    astype('float')
+df_train = df_crash_dummy[msk]
+df_test = df_crash_dummy[~msk]
+dill.dump_session("dump")
+
+
+# loading back previously saved session and data preparation for ml
+import dill
+dill.load_session("dump")
+dm = xgboost.DMatrix(data=df_crash_dummy, label=list(label), silent=False, nthread=NTHREAD)
+dm_train = xgboost.DMatrix(data=df_train, label=list(label_train), silent=False, nthread=NTHREAD)
+dm_test = xgboost.DMatrix(data=df_test, label=list(label_test), silent=False, nthread=NTHREAD)
+with open("fmap", "w") as f:
+    f.write("\n".join([str(dm.feature_names.index(x)) + " " + x.replace(" ", "_") + " q" for x in dm.feature_names]))
+
+# modeling with xgboost native API
+# set up hyper-parameter
+eval_metrics = ['aucpr', 'logloss', 'auc']
+metric = eval_metrics[-1]
+params_raw = {
+    'booster': ['gbtree'],
+    'silent': [1],
+    'nthread': [NTHREAD],
+
+    'eta': [0.1, 0.01, 0.001],
+    # 'gamma': [0, 1000],
+    'max_depth': [4, 8, 12],
+    # 'min_child_weight ': [0, 10],
+    # 'max_delta_step ': [0, 10],
+    'subsample': [0.4, 0.8],
+    'colsample_bytree': [0.4, 0.8],
+    'colsample_bylevel': [0.4, 0.8],
+    'lambda': [10, 100],
+    'alpha': [10, 100],
+    'tree_method': ['gpu_hist'],
+    # 'updater': ['grow_colmaker],prune'],
+    # 'refresh_leaf': [1],
+    # 'process_type': ['default'],
+    'scale_pos_weight': [1, 100],
+    'grow_policy': ['depthwise', 'lossguide'],
+    'max_leaves': [512],
+    'max_bin': [64],
+    'predictor': ['gpu_predictor'],
+    'gpu_id': [3],
+    'n_gpus': [1],
+
+    'objective': ['binary:logistic'],
+    'base_score': [0.01],
+    'eval_metric': [eval_metrics],
+    'seed': [12345]
+}
+params_grid = []
+for k, v in copy.deepcopy(params_raw).items():
+    assert(isinstance(v, list))
+    result = []
+    if not params_grid:
+        result = [{k: vc} for vc in v]
+    else:
+        while v:
+            vc = v.pop()
+            null = [x.update({k: vc}) for x in params_grid]
+            result += copy.deepcopy(params_grid)
+            # pdb.set_trace()
+    params_grid = result
+
+# training model
+dict_tmp = {}
+xgb_boosters = []
+xgb_eval = []
+for i in range(560, len(params_grid)):
+    if (i % 20 == 0) or (i == len(params_grid) - 1):
+        print("{}  --  Training {:<4} out of {}".format(str(datetime.datetime.now()), i, len(params_grid)))
+    if (i % 40 == 0) or (i >= len(params_grid) - 1):
+        print("{}  --  Saving dump-trained-{} for {}th grid".format(str(datetime.datetime.now()), metric, i))
+        with open("dump-trained-" + metric, "wb") as f:
+            dill.dump((eval_metrics, metric, params_raw, params_grid, xgb_boosters, xgb_eval), file=f)
+    x_booster = xgboost.train(
+        params=params_grid[i],
+        dtrain=dm_train,
+        num_boost_round=2000,
+        maximize=True if metric == 'auc' else False,
+        evals=[(dm, 'dm'), (dm_train, "train"), (dm_test, "test")],
+        evals_result=dict_tmp,
+        verbose_eval=False,
+        early_stopping_rounds=50)
+    xgb_boosters.append(x_booster.copy())
+    xgb_eval.append(copy.deepcopy(dict_tmp))
+    x_booster.__del__()
+    null = gc.collect()
+
+# find best model
+with open("dump-trained-" + metric, "rb") as f:
+    (params_raw, params_grid, xgb_boosters, xgb_eval) = dill.load(f)
+
+eval_cols = ["data", "i_grid", "idx", "nlimit", "nstop", "nbest", "score_type"] + eval_metrics
+eval_types = [str, np.int, np.int, np.int, np.int, np.int, str] + [float] * len(eval_metrics)
+eval_df = pd.read_csv(
+    io.StringIO(""),
+    names=eval_cols,
+    dtype=dict(zip(eval_cols, eval_types)))
+for i in range(0, len(xgb_eval)):
+    x = xgb_eval[i]
+    score_type = "best_iteration"
+    nbest = int(xgb_boosters[i].attributes()[score_type])
+    nstop = len(x.get("test").get(metric))
+    idx = xgb_eval.index(x)
+    for k in x.keys():
+        scores = {
+            "data":  k,
+            "i_grid": i,
+            "idx": idx,
+            "nlimit": 2000,
+            "nstop": nstop,
+            "nbest": nbest,
+            "score_type": score_type
+        }
+        null = [scores.update({m: x.get(k).get(m)[nbest]}) for m in eval_metrics]
+        eval_df = eval_df.append(scores, ignore_index=True, verify_integrity=True)
+
+
+eval_df_distinct = eval_df.drop_duplicates()
+eval_df_distinct.sort_values(by=metric, axis=0, ascending=False if metric == 'auc' else True, inplace=True)
+eval_df_distinct[eval_df_distinct.data == "test"].head(20)
+i_best = eval_df_distinct[eval_df_distinct.data == "test"].head(1)["i_grid"].iloc[0]
+nbest = eval_df_distinct[eval_df_distinct.data == "test"].head(1)["nbest"].iloc[0]
+eval_df_distinct[eval_df_distinct.i_grid == i_best].head(20)
+print(params_grid[i_best])
+
+# inspect best model - get feature importance
+importance_types = ['weight', 'gain', 'cover', 'total_gain', 'total_cover']
+xgb_importance = pd.DataFrame()
+for x in importance_types:
+    print(x)
+    x_imp = xgb_boosters[i_best].get_score(fmap='fmap', importance_type=x)
+    x_keys = sorted(list(x_imp.keys()))
+    x_values = pd.Series(list([x_imp.get(xx) for xx in x_keys]), index=x_keys)
+    if xgb_importance.index.size:
+        assert(x_keys == list(xgb_importance.index)), 1
+        assert(xgb_importance.shape[0] == len(x_values)), 2
+        xgb_importance = xgb_importance.join(pd.Series(data=x_values, index=x_keys, name=x), how='outer')
+    else:
+        xgb_importance = pd.DataFrame(pd.Series(x_values, index=x_keys, name=x), index=x_keys)
+
+
+xgb_importance.sort_values(by="gain", axis=0, ascending=False, inplace=True)
+xgb_importance['gain%'] = xgb_importance["gain"].divide(xgb_importance["gain"].sum())
+xgb_importance['cumgain%'] = xgb_importance["gain"].cumsum().divide(xgb_importance["gain"].sum())
+xgb_importance.filter(["gain", "gain%", "cumgain%"]).head(150)
+
+# inspect model - stability
+xgb_cv = xgboost.cv(
+    params=params_grid[i_best],
+    dtrain=dm,
+    num_boost_round=2000,
+    maximize=True if metric == 'auc' else False,
+    nfold=5,
+    metrics=eval_metrics,
+    early_stopping_rounds=50,
+    as_pandas=True,
+    verbose_eval=False,
+    show_stdv=True,
+    seed=54321)
+cv_cols = [x.format(metric) for x in ['test-{}-mean', 'test-{}-std', 'train-{}-mean', 'train-{}-std']]
+xgb_cv.filter(cv_cols).iloc[(nbest-10):(nbest+10), ]
